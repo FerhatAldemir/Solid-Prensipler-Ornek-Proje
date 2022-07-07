@@ -2,8 +2,9 @@
 Solid Prensiplere Uygun Olarak küçük bir proje
 
 Merhabalar 
+Proje Tanımı
 
-Solid Prensiblere bir şekilde Örnek Olması için geliştirdiğim küçük restfull projesi
+Fatura ve Sipariş  Ekleme Çıkarma Yapabilen aynı anda hem mssql hem sql Lite desteği olan, Solid Prensiblere uygun bir Proje yapısına Örnek Olması için geliştirdiğim  restfull projesi
 
 5 Adet Solid Prensibi de kullanıldı
 
