@@ -4,9 +4,9 @@ using System.Linq.Expressions;
 using System.Text;
 using Example.Core.Entities;
 
-namespace Example.Core.DataAccess
+namespace Example.Core.RepoStory
 {
-   public  interface IEntityRepoStory<T> where T : class,Ientites,new()
+    public interface IEntityRepoStory<T> where T : class, Ientites
     {
         T Get(Expression<Func<T, bool>> Filter);
         T GetAll();

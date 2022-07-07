@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Example.Core.DataAccess
 {
-   public interface DataContext
+    public interface DataBaseContext
     {
+
+
+
     }
 }
