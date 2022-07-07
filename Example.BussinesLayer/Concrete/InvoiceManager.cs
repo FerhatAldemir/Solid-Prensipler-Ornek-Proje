@@ -14,9 +14,9 @@ namespace Example.BussinesLayer.Concrete
             InvoiceDal = Global.GetInstance().Service.GetService<DataAccessLayer.absraction.IinvoiceDal>();
         }
 
-        public Invoice Delete(Invoice ITem)
+        public void Delete(Invoice ITem)
         {
-            throw new NotImplementedException();
+            InvoiceDal.Remove(ITem);
         }
 
         public Invoice Get(int Id)
@@ -26,12 +26,12 @@ namespace Example.BussinesLayer.Concrete
 
         public Invoice Post(Invoice Item)
         {
-            throw new NotImplementedException();
+            return InvoiceDal.Add(Item);
         }
 
         public Invoice Put(Invoice ITem)
         {
-            throw new NotImplementedException();
+            return InvoiceDal.Update(ITem);
         }
     }
 }
