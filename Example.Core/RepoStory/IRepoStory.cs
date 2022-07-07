@@ -9,8 +9,8 @@ namespace Example.Core.RepoStory
     public interface IEntityRepoStory<T>:Core.UnitOfWork.IUnitOfWork where T : class, Ientites
     {
         T Get(Expression<Func<T, bool>> Filter);
-        T GetAll();
-        T GetAll(Expression<Func<T, bool>> Filter);
+        List<T> GetAll();
+        List<T> GetAll(Expression<Func<T, bool>> Filter);
 
         T Add(T Item);
 
@@ -18,11 +18,11 @@ namespace Example.Core.RepoStory
 
         List<T> Update(List<T> Items);
 
-        bool Remove(T Item);
-        bool Remove(int Logicalref);
-        bool Remove(List<T> Items);
-        bool Remove(int[] LogicalRefs);
-        bool Remove(Expression<Func<T, bool>> Filter);
+        void Remove(T Item);
+     
+        void Remove(List<T> Items);
+       
+        void Remove(Expression<Func<T, bool>> Filter);
 
     }
 }

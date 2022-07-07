@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
+using System.Linq;
+using Example.Core.Entities;
 
 namespace Example.Core.Concrete
 {
-    public class Repostory<Tentity>: UnitWork, RepoStory.IEntityRepoStory<Tentity> where Tentity : class, Core.Entities.Ientites
+    public class Repostory<Tentity>: UnitWork, RepoStory.IEntityRepoStory<Tentity> where Tentity : class, Ientites
     {
         private readonly DbContext _Context;
         
@@ -24,52 +25,67 @@ namespace Example.Core.Concrete
 
         public Tentity Get(Expression<Func<Tentity, bool>> Filter)
         {
-            throw new NotImplementedException();
+            return _Context.Set<Tentity>().FirstOrDefault(Filter);
         }
 
-        public Tentity GetAll()
+        public List<Tentity> GetAll()
         {
-            throw new NotImplementedException();
+            return _Context.Set<Tentity>().ToList();
+
         }
 
-        public Tentity GetAll(Expression<Func<Tentity, bool>> Filter)
+        public List<Tentity> GetAll(Expression<Func<Tentity, bool>> Filter)
         {
-            throw new NotImplementedException();
+            return _Context.Set<Tentity>().Where(Filter).ToList();
         }
 
-        public bool Remove(Tentity Item)
+        public void Remove(Tentity Item)
         {
-            throw new NotImplementedException();
+             _Context.Remove(Item);
         }
 
-        public bool Remove(int Logicalref)
+     
+
+        public void Remove(List<Tentity> Items)
         {
-            throw new NotImplementedException();
+            foreach (Tentity Item in Items)
+            {
+
+                var Entry = _Context.Entry(Item);
+                Entry.State = EntityState.Deleted;
+               
+
+            }
         }
 
-        public bool Remove(List<Tentity> Items)
-        {
-            throw new NotImplementedException();
-        }
+      
 
-        public bool Remove(int[] LogicalRefs)
+        public void Remove(Expression<Func<Tentity, bool>> Filter)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(Expression<Func<Tentity, bool>> Filter)
-        {
-            throw new NotImplementedException();
+            _Context.RemoveRange(Filter);
         }
 
         public Tentity Update(Tentity Item)
         {
-            throw new NotImplementedException();
+            var Entry = _Context.Entry(Item);
+            Entry.State = EntityState.Modified;
+            return Item;
         }
 
         public List<Tentity> Update(List<Tentity> Items)
         {
-            throw new NotImplementedException();
+            List<Tentity> ReturnsItem = new List<Tentity>();
+
+            foreach (Tentity Item in Items)
+            {
+
+                var Entry = _Context.Entry(Item);
+                Entry.State = EntityState.Modified;
+                ReturnsItem.Add(Item);
+
+            }
+            return ReturnsItem;
+                 
         }
     }
 }

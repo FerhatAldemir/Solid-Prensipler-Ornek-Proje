@@ -13,19 +13,17 @@ namespace Example.BussinesLayer.IOC
     {
         public static IServiceProvider ConfigRepoStory(this ServiceCollection services)
         {   
-            services.AddTransient<DataAccessLayer.absraction.IinvoiceDal, DataAccessLayer.Concrete.InvoiceDal>();
+            services.AddTransient<IinvoiceDal, InvoiceDal>();
 
             services.AddSingleton<ICheckDatabase, CheckDataBase>();
 
             if (Global.GetInstance().CurrentDatabase == DatabaseTypes.Mssql)
             {
                 services.AddTransient<DbContext, MssqlContext>();
-
             }
             else if (Global.GetInstance().CurrentDatabase == DatabaseTypes.SqlLite)
             {
                 services.AddTransient<DbContext, SqlLiteContext>();
-
             }
 
 

@@ -14,9 +14,4 @@
     <ProjectReference Include="..\Example.Entites\Example.Entites.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Absraction\" />
-    <Folder Include="Concrete\" />
-  </ItemGroup>
-
 </Project>

@@ -9,6 +9,6 @@ namespace Example.Core.Bussines
         T  Post(T Item);
         T Put(T ITem);
         T Delete(T ITem);
-        T Get(T ITem);      
+        T Get(int Id);      
     }
 }
