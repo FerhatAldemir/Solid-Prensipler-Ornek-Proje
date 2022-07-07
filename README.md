@@ -11,7 +11,9 @@ Mimari Olarak Katmanlı Mimarı Kullanıldı
 
 Kullandığım Desing Pantern Listesi
 1.UnitOfWork Desing Pantern
+
 2.Singlaton Desing Pantern
+
 3.Dependency Injection
 
 Kullandığım Teknolojiler
