@@ -15,7 +15,9 @@ Kullandığım Desing Pantern Listesi
 
 2.Singlaton Desing Pantern
 
-3.Dependency Injection
+3.Dependency Injection Desing Pantern
+
+4.RepoStory Desing Pantern
 
 Kullandığım Teknolojiler
 
