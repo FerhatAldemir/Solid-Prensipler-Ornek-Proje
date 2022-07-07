@@ -7,7 +7,7 @@ namespace Example.Entites.Absraction
 {
     public abstract class BaseEntite
     {
-       
+        [Key]
         public  int LogicalRef { get; set; }
     }
 }

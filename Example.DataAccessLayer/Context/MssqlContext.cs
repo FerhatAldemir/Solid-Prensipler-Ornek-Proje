@@ -1,29 +1,38 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Example.DataAccessLayer.Context
 {
-    public class MssqlContext : DbContext,Core.DataAccess.DataBaseContext
+    public class MssqlContext : DbContext
     {
         public MssqlContext()
         {
 
 
-            CheckDataBase();
-            Migration();
+            this.Database.AutoTransactionsEnabled = false;
+
+            this.ChangeTracker.LazyLoadingEnabled = false;
 
         }
 
-        public bool CheckDataBase()
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            throw new NotImplementedException();
+
+
+
+            var ConString = @"Server=.\SQLEXPRESS;Database=Examples;User Id=sa;Password=123456";
+
+
+
+            optionsBuilder.UseSqlServer(ConString);
+
+
         }
 
-        public bool Migration()
-        {
-            throw new NotImplementedException();
+        public DbSet<Entites.concrete.Invoice> ınvoices { get;set;}
+
         }
-    }
 }

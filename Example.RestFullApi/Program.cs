@@ -13,6 +13,9 @@ namespace Example.RestFullApi
     {
         public static void Main(string[] args)
         {
+            BussinesLayer.Global.GetInstance();
+
+
             CreateHostBuilder(args).Build().Run();
         }
 
