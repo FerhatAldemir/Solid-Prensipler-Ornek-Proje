@@ -17,6 +17,7 @@ Kullandığım Desing Pantern Listesi
 3.Dependency Injection
 
 Kullandığım Teknolojiler
+
 1.net Core
 
 2.Entity Framework(Mssql,Sql) desteği
