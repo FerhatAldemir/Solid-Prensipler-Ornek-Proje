@@ -23,7 +23,7 @@ Kullandığım Teknolojiler
 
 1.net Core
 
-2.Entity Framework(Mssql,Sql) desteği
+2.Entity Framework code first (Mssql,Sql) desteği
 
 Kullandığım programlama yapıları
 1. Interface
