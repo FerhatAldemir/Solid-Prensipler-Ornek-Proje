@@ -18,6 +18,7 @@ Kullandığım Desing Pantern Listesi
 
 Kullandığım Teknolojiler
 1.net Core
+
 2.Entity Framework(Mssql,Sql) desteği
 
 Kullandığım programlama yapıları
