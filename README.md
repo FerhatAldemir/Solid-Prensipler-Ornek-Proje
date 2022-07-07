@@ -1,0 +1,25 @@
+# Solid-Prensipler-Ornek-Proje
+Solid Prensiplere Uygun Olarak küçük bir proje
+
+Merhabalar 
+
+Solid Prensiblere bir şekilde Örnek Olması için geliştirdiğim küçük restfull projesi
+
+5 Adet Solid Prensibi de kullanıldı
+
+Mimari Olarak Katmanlı Mimarı Kullanıldı 
+
+Kullandığım Desing Pantern Listesi
+1.UnitOfWork Desing Pantern
+2.Singlaton Desing Pantern
+3.Dependency Injection
+
+Kullandığım Teknolojiler
+1.net Core
+2.Entity Framework(Mssql,Sql) desteği
+
+Kullandığım programlama yapıları
+1. Interface
+2. Abstract
+3. Kapsülleme
+4. Generic Yapılar
