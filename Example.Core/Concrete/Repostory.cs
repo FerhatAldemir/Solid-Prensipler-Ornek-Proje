@@ -6,11 +6,11 @@ using System.Text;
 
 namespace Example.Core.Concrete
 {
-    public class Repostory<Tentity>: RepoStory.IEntityRepoStory<Tentity> where Tentity : class, Core.Entities.Ientites
+    public class Repostory<Tentity>: UnitWork, RepoStory.IEntityRepoStory<Tentity> where Tentity : class, Core.Entities.Ientites
     {
         private readonly DbContext _Context;
         
-        public Repostory(DbContext context)
+        public Repostory(DbContext context):base(context)
         {
             _Context = context;
             

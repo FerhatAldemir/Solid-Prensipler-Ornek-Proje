@@ -6,7 +6,7 @@ using Example.Core.Entities;
 
 namespace Example.Core.RepoStory
 {
-    public interface IEntityRepoStory<T> where T : class, Ientites
+    public interface IEntityRepoStory<T>:Core.UnitOfWork.IUnitOfWork where T : class, Ientites
     {
         T Get(Expression<Func<T, bool>> Filter);
         T GetAll();

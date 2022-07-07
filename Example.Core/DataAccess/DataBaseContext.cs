@@ -6,6 +6,8 @@ namespace Example.Core.DataAccess
 {
     public interface DataBaseContext
     {
+        bool CheckDataBase();
+        bool Migration();
 
 
 
