@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Example.DataAccessLayer.Concrete
 {
@@ -14,11 +15,11 @@ namespace Example.DataAccessLayer.Concrete
           
         }
 
-        public List<Invoice> GetAllInvoice(int Logicalref)
+        public List<Invoice> GetAllInvoice(Expression<Func<Entites.concrete.Invoice,bool>> Filter)
         {
 
-            var Item = from Inv in _Context.Set<Entites.concrete.Invoice>().AsQueryable()  
-                          
+            var Item = from Inv in _Context.Set<Entites.concrete.Invoice>().Where(Filter)
+                       
                        select new Invoice {
                            DocNum = Inv.DocNum,                         
                            date = Inv.date,

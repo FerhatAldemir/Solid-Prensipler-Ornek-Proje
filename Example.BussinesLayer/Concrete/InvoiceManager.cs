@@ -32,9 +32,9 @@ namespace Example.BussinesLayer.Concrete
             return null;//RepoStory.Invoice.Update(ITem);
         }
 
-        public Invoice Get(Expression<Func<Invoice, bool>> Filter)
+        public Invoice Get(Expression<Func<Example.Entites.concrete.Invoice, bool>> Filter)
         {
-            Invoice Invoice = RepoStory.Invoice.GetAllInvoice(0).FirstOrDefault();
+            Invoice Invoice = RepoStory.Invoice.GetAllInvoice(Filter).FirstOrDefault();
             
            return Invoice ;
         }

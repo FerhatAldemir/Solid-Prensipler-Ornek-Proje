@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Example.BussinesLayer.Absraction
 {
-    public interface IInvoiceService:Core.Bussines.BaseAbsraction<Entites.ComplexType.Invoice>
+    public interface IInvoiceService:Core.Bussines.BaseAbsraction<Entites.ComplexType.Invoice,Entites.concrete.Invoice>
     {
        
     }
