@@ -7,11 +7,11 @@ using Example.Core.Entities;
 
 namespace Example.Core.Concrete
 {
-    public class Repostory<Tentity>: UnitWork, RepoStory.IEntityRepoStory<Tentity> where Tentity : class, Ientites
+    public class Repostory<Tentity>: RepoStory.IEntityRepoStory<Tentity> where Tentity : class, Ientites
     {
         private readonly DbContext _Context;
         
-        public Repostory(DbContext context):base(context)
+        public Repostory(DbContext context)
         {
             _Context = context;
             

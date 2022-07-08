@@ -9,32 +9,32 @@ namespace Example.BussinesLayer.Concrete
 {
     public class InvoiceManager : BussinesLayer.Absraction.IInvoiceService
     {
-        private DataAccessLayer.absraction.IinvoiceDal InvoiceDal { get; set; }
+        private DataAccessLayer.RepoStoryAbsraction.IInvoiceRepoStory RepoStory { get; set; }
         public InvoiceManager()
         {
-            InvoiceDal = Global.GetInstance().Service.GetService<DataAccessLayer.absraction.IinvoiceDal>();
+            RepoStory = Global.GetInstance().Service.GetService<DataAccessLayer.RepoStoryAbsraction.IInvoiceRepoStory>();
         }
 
         public void Delete(Invoice ITem)
         {
-            InvoiceDal.Remove(ITem);
+            RepoStory.Invoice.Remove(ITem);
         }
 
         
 
         public Invoice Post(Invoice Item)
         {
-            return InvoiceDal.Add(Item);
+            return RepoStory.Invoice.Add(Item);
         }
 
         public Invoice Put(Invoice ITem)
         {
-            return InvoiceDal.Update(ITem);
+            return RepoStory.Invoice.Update(ITem);
         }
 
         public Invoice Get(Expression<Func<Invoice, bool>> Filter)
         {
-           return InvoiceDal.Get(Filter);
+           return RepoStory.Invoice.Get(Filter);
         }
     }
 }
