@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Example.Core.Bussines
@@ -9,6 +10,6 @@ namespace Example.Core.Bussines
         T  Post(T Item);
         T Put(T ITem);
         void Delete(T ITem);
-        T Get(int Id);      
+        T Get(Expression<Func<T,bool>> Filter);      
     }
 }

@@ -38,7 +38,7 @@ namespace Example.DataAccessLayer.Migrations
 
                     b.HasKey("LogicalRef");
 
-                    b.ToTable("Invoices");
+                    b.ToTable("INVOICE");
                 });
 #pragma warning restore 612, 618
         }

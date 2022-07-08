@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Example.Entites.concrete
 {
-    [Table("Invoice")]
+    [Table("INVOICE")]
     public class Invoice : Absraction.BaseEntite, Core.Entities.Ientites
     {
         [MaxLength(length: 16)]

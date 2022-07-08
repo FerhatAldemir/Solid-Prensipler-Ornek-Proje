@@ -1,18 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Example.BussinesLayer.Absraction;
+using System.Linq;
 
 namespace Example.RestFullApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class Invoice : ControllerBase
+    public class InvoiceController : ControllerBase
     {
+        private readonly IInvoiceService _invoiceService;
+        public InvoiceController(IInvoiceService InvoiceService)
+        {
+            _invoiceService = InvoiceService;
+        }
       [HttpGet]
      public IActionResult GetInvoice()
         {
-
-
-
-            return Ok("");
+            return Ok(_invoiceService.Get(x=>x.Number == "00001"));
         }
 
 

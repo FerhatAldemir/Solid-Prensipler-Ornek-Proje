@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Example.BussinesLayer.Concrete
@@ -19,10 +20,7 @@ namespace Example.BussinesLayer.Concrete
             InvoiceDal.Remove(ITem);
         }
 
-        public Invoice Get(int Id)
-        {
-          return InvoiceDal.Get(x=>x.LogicalRef == Id);
-        }
+        
 
         public Invoice Post(Invoice Item)
         {
@@ -32,6 +30,11 @@ namespace Example.BussinesLayer.Concrete
         public Invoice Put(Invoice ITem)
         {
             return InvoiceDal.Update(ITem);
+        }
+
+        public Invoice Get(Expression<Func<Invoice, bool>> Filter)
+        {
+           return InvoiceDal.Get(Filter);
         }
     }
 }

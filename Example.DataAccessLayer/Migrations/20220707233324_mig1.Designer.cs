@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Example.DataAccessLayer.Migrations
 {
     [DbContext(typeof(MssqlContext))]
-    [Migration("20220707071007_migration1")]
-    partial class migration1
+    [Migration("20220707233324_mig1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,7 +40,7 @@ namespace Example.DataAccessLayer.Migrations
 
                     b.HasKey("LogicalRef");
 
-                    b.ToTable("ınvoices");
+                    b.ToTable("INVOICE");
                 });
 #pragma warning restore 612, 618
         }

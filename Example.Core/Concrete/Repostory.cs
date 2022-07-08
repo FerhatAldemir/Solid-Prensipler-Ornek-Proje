@@ -25,6 +25,8 @@ namespace Example.Core.Concrete
 
         public Tentity Get(Expression<Func<Tentity, bool>> Filter)
         {
+           
+
             return _Context.Set<Tentity>().FirstOrDefault(Filter);
         }
 

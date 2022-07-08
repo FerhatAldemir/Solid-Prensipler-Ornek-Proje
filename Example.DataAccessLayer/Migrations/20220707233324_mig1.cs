@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Example.DataAccessLayer.Migrations
 {
-    public partial class migration1 : Migration
+    public partial class mig1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Invoices",
+                name: "INVOICE",
                 columns: table => new
                 {
                     LogicalRef = table.Column<int>(type: "int", nullable: false)
@@ -19,14 +19,14 @@ namespace Example.DataAccessLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ınvoices", x => x.LogicalRef);
+                    table.PrimaryKey("PK_INVOICE", x => x.LogicalRef);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ınvoices");
+                name: "INVOICE");
         }
     }
 }
