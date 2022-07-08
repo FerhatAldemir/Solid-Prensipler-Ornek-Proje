@@ -7,5 +7,6 @@ namespace Example.DataAccessLayer.RepoStoryAbsraction
     public interface IInvoiceRepoStory:Core.UnitOfWork.IUnitOfWorkBase
     {
         absraction.IinvoiceDal Invoice { get; }
+        absraction.IStLineDal StLine { get; }
     }
 }

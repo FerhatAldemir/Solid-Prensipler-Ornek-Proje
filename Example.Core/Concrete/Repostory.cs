@@ -9,7 +9,7 @@ namespace Example.Core.Concrete
 {
     public class Repostory<Tentity>: RepoStory.IEntityRepoStory<Tentity> where Tentity : class, Ientites
     {
-        private readonly DbContext _Context;
+        protected readonly DbContext _Context;
         
         public Repostory(DbContext context)
         {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Example.BussinesLayer.Absraction;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Example.RestFullApi.Controllers
 {
@@ -14,9 +15,10 @@ namespace Example.RestFullApi.Controllers
             _invoiceService = InvoiceService;
         }
       [HttpGet]
-     public IActionResult GetInvoice()
+     public ActionResult<Entites.ComplexType.Invoice> GetInvoice()
         {
-            return Ok(_invoiceService.Get(x=>x.Number == "00001"));
+            
+            return Ok(_invoiceService.Get(x => x.Number == "00001"));
         }
 
 

@@ -8,7 +8,7 @@ namespace Example.DataAccessLayer.Context
     public class SqlLiteContext:DbContext
     {
         public DbSet<Entites.concrete.Invoice> ınvoices { get; set; }
-
+        public DbSet<Entites.concrete.InvoiceLine> ınvoiceLines { get; set; }
 
         public SqlLiteContext()
         {

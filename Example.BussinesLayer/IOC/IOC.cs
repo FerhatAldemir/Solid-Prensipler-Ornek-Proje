@@ -8,6 +8,7 @@ using Example.DataAccessLayer.Context;
 using Example.DataAccessLayer.RepoStoryAbsraction;
 using Example.DataAccessLayer.RepoStoryConcrete;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Example.BussinesLayer.IOC
 {
@@ -19,6 +20,7 @@ namespace Example.BussinesLayer.IOC
 
             services.AddSingleton<ICheckDatabase, CheckDataBase>();
             services.AddTransient<IInvoiceRepoStory, InvoiceRepoStory>();
+            services.AddTransient<IStLineDal, StLineDal>();
 
             if (Global.GetInstance().CurrentDatabase == DatabaseTypes.Mssql)
             {

@@ -9,11 +9,15 @@ namespace Example.DataAccessLayer.RepoStoryConcrete
     public class InvoiceRepoStory : Core.Concrete.UnitWorkBase, RepoStoryAbsraction.IInvoiceRepoStory
     {
         private  IinvoiceDal InvoiceDal { get; set; }
-        public InvoiceRepoStory(DbContext context,IinvoiceDal _InvoiceDal) : base(context)
+        private IStLineDal StLineDal { get; set; }
+        public InvoiceRepoStory(DbContext context,IinvoiceDal _InvoiceDal,IStLineDal stLineDal) : base(context)
         {
             InvoiceDal = _InvoiceDal;
+            StLineDal = stLineDal;
         }
 
         public IinvoiceDal Invoice => InvoiceDal;
+
+        public IStLineDal StLine => StLineDal;
     }
 }

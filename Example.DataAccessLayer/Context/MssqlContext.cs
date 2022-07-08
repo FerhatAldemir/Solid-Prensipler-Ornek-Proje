@@ -15,6 +15,8 @@ namespace Example.DataAccessLayer.Context
             this.Database.AutoTransactionsEnabled = false;
 
             this.ChangeTracker.LazyLoadingEnabled = false;
+            this.ChangeTracker.AutoDetectChangesEnabled = false;
+           
 
         }
 
@@ -33,6 +35,6 @@ namespace Example.DataAccessLayer.Context
         }
 
         public DbSet<Entites.concrete.Invoice> ınvoices { get;set;}
-
+        public DbSet<Entites.concrete.InvoiceLine> ınvoiceLines { get;set;} 
         }
 }
