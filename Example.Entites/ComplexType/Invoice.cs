@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Example.Entites.ComplexType
 {
-    public class Invoice
+    public class Invoice:BaseComplexType
     {
         public int LogicalRef { get; set; }
         [MaxLength(length: 16)]
@@ -14,6 +14,13 @@ namespace Example.Entites.ComplexType
         public DateTime date { get; set; }
 
         public int DocNum { get; set; }
-        public List<Entites.concrete.InvoiceLine> InvoiceLines { get; set; }
+        public List<Entites.ComplexType.StLine> InvoiceLines { get; set; }
+
+        public static implicit operator concrete.Invoice(Invoice Invoice)
+        {
+
+
+            return new concrete.Invoice { };
+        }
     }
 }

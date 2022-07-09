@@ -5,13 +5,18 @@ using System.Text;
 
 namespace Example.Core.Bussines
 {
-    public interface BaseAbsraction<T,F> 
-        where T:class
+    public interface BaseAbsraction<ComplexType,Table> 
+        where ComplexType : class, new()
+        where Table: class,new()
        
     {
-        T  Post(T Item);
-        T Put(T ITem);
-        void Delete(T ITem);
-        T Get(Expression<Func<F,bool>> Filter);      
+        ComplexType  Post(ComplexType Item);
+        ComplexType Put(ComplexType ITem);
+        void Delete(Table ITem);
+        void Delete(int LogicalRef);
+        void Delete(Expression<Func<Table,bool>> Filter);
+        ComplexType Get(Expression<Func<Table, bool>> Filter);
+        List<ComplexType> GetAll(Expression<Func<Table,bool>> Filter);
+        List<ComplexType> GetAll();
     }
 }

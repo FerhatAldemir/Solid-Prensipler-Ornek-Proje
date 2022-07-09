@@ -7,7 +7,8 @@ namespace Example.DataAccessLayer.absraction
 {
     public interface IinvoiceDal:Core.RepoStory.IEntityRepoStory<Entites.concrete.Invoice>
     {
-        List<Entites.ComplexType.Invoice> GetAllInvoice(Expression<Func<Entites.concrete.Invoice, bool>> Filter);
+        List<Entites.ComplexType.Invoice> GetAllInvoice(Expression<Func<Entites.concrete.Invoice, bool>> Filter = null);
+        Entites.ComplexType.Invoice GetInvoice(Expression<Func<Entites.concrete.Invoice,bool>> Filter);
 
     }
 }

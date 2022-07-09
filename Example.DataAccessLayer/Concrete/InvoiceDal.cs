@@ -12,22 +12,46 @@ namespace Example.DataAccessLayer.Concrete
     {
         public InvoiceDal(DbContext context) : base(context)
         {
-          
+
         }
 
-        public List<Invoice> GetAllInvoice(Expression<Func<Entites.concrete.Invoice,bool>> Filter)
+        public List<Invoice> GetAllInvoice(Expression<Func<Entites.concrete.Invoice, bool>> Filter = null)
         {
 
-            var Item = from Inv in _Context.Set<Entites.concrete.Invoice>().Where(Filter)
-                       
+            var Item = from Inv in Filter == null ? _Context.Set<Entites.concrete.Invoice>() : _Context.Set<Entites.concrete.Invoice>().Where(Filter)
+
+
                        select new Invoice {
-                           DocNum = Inv.DocNum,                         
+                           DocNum = Inv.DocNum,
                            date = Inv.date,
                            LogicalRef = Inv.LogicalRef,
                            Number = Inv.Number,
-                           InvoiceLines = _Context.Set<Entites.concrete.InvoiceLine>().Where(x=>x.InvoiceRef == Inv.LogicalRef).ToList()
+                           Statu = Statu.Updated,
+                           InvoiceLines = _Context.Set<Entites.concrete.InvoiceLine>().Where(x => x.InvoiceRef == Inv.LogicalRef).Cast<Entites.ComplexType.StLine>().ToList()
                        };
             return Item.ToList();
         }
+
+        public Invoice GetInvoice(Expression<Func<Entites.concrete.Invoice, bool>> Filter)
+        {
+            var Item = from Inv in _Context.Set<Entites.concrete.Invoice>().Where(Filter)
+                       select new Invoice
+                       {
+                           DocNum = Inv.DocNum,
+                           date = Inv.date,
+                           LogicalRef = Inv.LogicalRef,
+                           Number = Inv.Number,
+                           InvoiceLines = _Context.Set<Entites.concrete.InvoiceLine>().Where(x => x.InvoiceRef == Inv.LogicalRef).Cast<Entites.ComplexType.StLine>().ToList(),
+                           Statu  = Entites.ComplexType.Statu.Updated
+                       };
+
+
+            return Item.FirstOrDefault() ?? new Invoice();
+        }
+
+        
+
+
     }
+        
 }

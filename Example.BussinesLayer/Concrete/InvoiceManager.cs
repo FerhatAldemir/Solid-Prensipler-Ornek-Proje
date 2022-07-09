@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using System.Linq;
+using Example.Core.Bussines;
 
 namespace Example.BussinesLayer.Concrete
 {
@@ -16,27 +17,50 @@ namespace Example.BussinesLayer.Concrete
             RepoStory = Global.GetInstance().Service.GetService<DataAccessLayer.RepoStoryAbsraction.IInvoiceRepoStory>();
         }
 
-        public void Delete(Invoice ITem)
+        public Entites.ComplexType.Invoice Post(Entites.ComplexType.Invoice Item)
         {
-            /*RepoStory.Invoice.Remove(ITem);*/
-        }
-        public Invoice Post(Invoice Item)
-        {
-
-
-            return null; //RepoStory.Invoice.Add(Item);
+            throw new NotImplementedException();
         }
 
-        public Invoice Put(Invoice ITem)
+        public Entites.ComplexType.Invoice Put(Entites.ComplexType.Invoice ITem)
         {
-            return null;//RepoStory.Invoice.Update(ITem);
+            throw new NotImplementedException();
         }
 
-        public Invoice Get(Expression<Func<Example.Entites.concrete.Invoice, bool>> Filter)
+        public void Delete(Entites.concrete.Invoice ITem)
         {
-            Invoice Invoice = RepoStory.Invoice.GetAllInvoice(Filter).FirstOrDefault();
-            
-           return Invoice ;
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int LogicalRef)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Expression<Func<Entites.concrete.Invoice, bool>> Filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Entites.ComplexType.Invoice Get(Expression<Func<Entites.concrete.Invoice, bool>> Filter)
+        {
+            var Item = RepoStory.Invoice.GetInvoice(Filter);
+            RepoStory.Dispose();
+            return Item;
+        }
+
+        public List<Entites.ComplexType.Invoice> GetAll(Expression<Func<Entites.concrete.Invoice, bool>> Filter)
+        {
+            var Items = RepoStory.Invoice.GetAllInvoice(Filter);
+            RepoStory.Dispose();
+            return Items;
+        }
+
+        public List<Entites.ComplexType.Invoice> GetAll()
+        {
+            var Items = RepoStory.Invoice.GetAllInvoice();
+            RepoStory.Dispose();
+            return Items;
         }
     }
 }
