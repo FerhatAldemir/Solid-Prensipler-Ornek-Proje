@@ -21,7 +21,7 @@ namespace Example.BussinesLayer.IOC
 
 
            // services.AddTransient(typeof(DataAccessLayer.absraction.IinvoiceDal),typeof(DataAccessLayer.Concrete.InvoiceDal));
-            services.AddSingleton<ICheckDatabase, CheckDataBase>();
+         
            
            
             TypeInfo[] TypeRepo = Assembly.
@@ -36,14 +36,18 @@ namespace Example.BussinesLayer.IOC
                 ToArray();
            
             services.RegisterTypes(TypeRepo, ServiceLifetime.Transient);
-           
+
+            services.RegisterTypes<ICheckDatabase, CheckDataBase>(ServiceLifetime.Singleton);
+          
+
             if (Global.GetInstance().CurrentDatabase == DatabaseTypes.Mssql)
             {
-                services.AddTransient<DbContext, MssqlContext>();
+                services.RegisterTypes<DbContext, MssqlContext>(ServiceLifetime.Transient);
             }
             else if (Global.GetInstance().CurrentDatabase == DatabaseTypes.SqlLite)
             {
-                services.AddTransient<DbContext, SqlLiteContext>();
+                services.RegisterTypes<DbContext, SqlLiteContext>(ServiceLifetime.Transient);
+          
             }
 
 
@@ -56,13 +60,53 @@ namespace Example.BussinesLayer.IOC
             TypeInfo[] InterFacesTyps = typeInfo.Where(x => x.IsInterface).ToArray();
             foreach (TypeInfo _Type in InterFacesTyps)
             {
-                var Class = ClassTypes.FirstOrDefault(x=>x.ImplementedInterfaces.Any(y=>y.GetTypeInfo() == _Type.GetTypeInfo()));
-               Service.AddTransient(_Type.GetTypeInfo(), Class.GetTypeInfo());
+                TypeInfo Class = ClassTypes.FirstOrDefault(x=>x.ImplementedInterfaces.Any(y=>y.GetTypeInfo() == _Type.GetTypeInfo()));
+
+                switch (serviceLifetime)
+                {
+                    case ServiceLifetime.Transient:
+                        Service.AddTransient(_Type.GetTypeInfo(), Class.GetTypeInfo());
+                        break;
+                    case ServiceLifetime.Singleton:
+                    Service.AddSingleton(_Type.GetTypeInfo(), Class.GetTypeInfo());
+                        break;
+                    case ServiceLifetime.Scoped:
+                        Service.AddScoped(_Type.GetTypeInfo(), Class.GetTypeInfo());
+                        break;
+                }
+              
                 
 
             }
 
 
         }
+
+        private static void RegisterTypes<T,E>(this IServiceCollection Service, ServiceLifetime serviceLifetime)
+        {
+           
+          
+               
+
+                switch (serviceLifetime)
+                {
+                    case ServiceLifetime.Transient:
+                        Service.AddTransient(typeof(T),typeof(E));
+                        break;
+                    case ServiceLifetime.Singleton:
+                        Service.AddSingleton(typeof(T), typeof(E));
+                        break;
+                    case ServiceLifetime.Scoped:
+                        Service.AddScoped(typeof(T), typeof(E));
+                        break;
+                
+
+
+
+            }
+
+
+        }
+
     }
 }
