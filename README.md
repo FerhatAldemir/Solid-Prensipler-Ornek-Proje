@@ -30,3 +30,4 @@ Kullandığım programlama yapıları
 2. Abstract
 3. Kapsülleme
 4. Generic Yapılar
+5.Reflection
