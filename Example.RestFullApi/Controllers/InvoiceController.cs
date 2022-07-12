@@ -16,12 +16,12 @@ namespace Example.RestFullApi.Controllers
             _invoiceService = InvoiceService;
         }
       [HttpGet]
-     public Core.Bussines.IResult<Entites.ComplexType.Invoice> GetInvoice()
+     public ActionResult<Core.Bussines.IResult<Entites.ComplexType.Invoice>> GetInvoice()
         {
 
-            //return Ok(_invoiceService.Get(x => x.Number == "00001"));
-
-            return _invoiceService.Get(x => x.Number == "00001");
+            var Item = _invoiceService.Get(x => x.Number == "00001");
+            
+            return this.StatusCode((int)Item.StatusCode,Item);
         }
 
 

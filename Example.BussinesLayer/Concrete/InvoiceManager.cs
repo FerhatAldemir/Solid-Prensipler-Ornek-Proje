@@ -49,9 +49,25 @@ namespace Example.BussinesLayer.Concrete
         {
             var Item = RepoStory.Invoice.GetInvoice(Filter);
             RepoStory.Dispose();
-            ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.Accepted);
-            ResultBuilder.AddMessage("Veriler Başarılı Bir Şekilde Getirildi");
-            ResultBuilder.AddITem(Item);
+
+            if (Item == null)
+            {
+                ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.BadRequest);
+                ResultBuilder.AddMessage("Veri Bulanamadı");
+
+
+            }
+            else
+            {
+                ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.OK);
+                ResultBuilder.AddMessage("Veriler Başarılı Bir Şekilde Listelendi");
+
+
+                ResultBuilder.AddITem(Item);
+
+            }
+            
+           
             return ResultBuilder.GetResult();
         }
 
