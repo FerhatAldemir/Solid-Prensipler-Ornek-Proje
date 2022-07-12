@@ -24,32 +24,32 @@ namespace Example.RestFullApi.Controllers
             return this.StatusCode((int)Item.StatusCode,Item);
         }
 
-
-        [HttpDelete]
-        public IActionResult RemoveInvoice()
+        
+        [HttpDelete("{id}")]
+        public IActionResult RemoveInvoice(int id)
         {
 
 
-
-            return BadRequest("");
+            var Item = _invoiceService.Delete(id);
+            return this.StatusCode((int)Item.StatusCode, Item);
         }
 
         [HttpPut]
-        public IActionResult UpdateInvoice()
+        public ActionResult<Core.Bussines.IResult<Entites.ComplexType.Invoice>> UpdateInvoice([FromBody] Entites.ComplexType.Invoice Invoice)
         {
+            var Item = _invoiceService.Put(Invoice);
 
 
-
-            return Ok("");
+            return this.StatusCode((int)Item.StatusCode, Item);
         }
 
         [HttpPost]
-        public IActionResult AddInvoice()
+        public ActionResult<Core.Bussines.IResult<Entites.ComplexType.Invoice>> AddInvoice([FromBody] Entites.ComplexType.Invoice Invoice)
         {
 
+            var Item = _invoiceService.Post(Invoice);
 
-
-            return Ok("");
+            return this.StatusCode((int)Item.StatusCode,Item);
         }
     }
 }

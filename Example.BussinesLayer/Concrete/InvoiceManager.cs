@@ -30,17 +30,17 @@ namespace Example.BussinesLayer.Concrete
             throw new NotImplementedException();
         }
 
-        public void Delete(Entites.concrete.Invoice ITem)
+        public Result<Entites.ComplexType.Invoice> Delete(Entites.concrete.Invoice ITem)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int LogicalRef)
+        public Result<Entites.ComplexType.Invoice> Delete(int LogicalRef)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Expression<Func<Entites.concrete.Invoice, bool>> Filter)
+        public Result<Entites.ComplexType.Invoice> Delete(Expression<Func<Entites.concrete.Invoice, bool>> Filter)
         {
             throw new NotImplementedException();
         }

@@ -12,9 +12,9 @@ namespace Example.Core.Bussines
     {
         R  Post(ComplexType Item);
         R Put(ComplexType ITem);
-        void Delete(Table ITem);
-        void Delete(int LogicalRef);
-        void Delete(Expression<Func<Table,bool>> Filter);
+        R Delete(Table ITem);
+        R Delete(int LogicalRef);
+        R Delete(Expression<Func<Table,bool>> Filter);
         R Get(Expression<Func<Table, bool>> Filter);
         R GetAll(Expression<Func<Table,bool>> Filter);
         R GetAll();
