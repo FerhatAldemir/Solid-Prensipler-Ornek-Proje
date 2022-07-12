@@ -46,7 +46,7 @@ namespace Example.DataAccessLayer.Concrete
                        };
 
 
-            return Item.FirstOrDefault() ?? new Invoice();
+            return Item.FirstOrDefault();
         }
 
         

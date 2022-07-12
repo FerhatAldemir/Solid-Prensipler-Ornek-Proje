@@ -25,7 +25,7 @@ namespace Example.DataAccessLayer.Context
 
 
 
-            var ConString = @"Server=.\SQLEXPRESS;Database=Examples;User Id=sa;Password=123456";
+            var ConString = @"Server=DESKTOP-VK5TOV2\SQL19;Database=Examples;User Id=sa;Password=123456";
 
 
 

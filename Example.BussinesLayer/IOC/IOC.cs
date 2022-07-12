@@ -38,7 +38,9 @@ namespace Example.BussinesLayer.IOC
             services.RegisterTypes(TypeRepo, ServiceLifetime.Transient);
 
             services.RegisterTypes<ICheckDatabase, CheckDataBase>(ServiceLifetime.Singleton);
-          
+
+            services.RegisterTypes<Absraction.IResutBuilder<Entites.ComplexType.Invoice>, Concrete.ResultBuilder<Entites.ComplexType.Invoice>>(ServiceLifetime.Transient);
+
 
             if (Global.GetInstance().CurrentDatabase == DatabaseTypes.Mssql)
             {

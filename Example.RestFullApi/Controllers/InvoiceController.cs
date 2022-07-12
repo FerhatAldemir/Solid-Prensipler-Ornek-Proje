@@ -2,6 +2,7 @@
 using Example.BussinesLayer.Absraction;
 using System.Linq;
 using System.Collections.Generic;
+using System.Net;
 
 namespace Example.RestFullApi.Controllers
 {
@@ -15,10 +16,12 @@ namespace Example.RestFullApi.Controllers
             _invoiceService = InvoiceService;
         }
       [HttpGet]
-     public ActionResult<Entites.ComplexType.Invoice> GetInvoice()
+     public Core.Bussines.IResult<Entites.ComplexType.Invoice> GetInvoice()
         {
-            
-            return Ok(_invoiceService.Get(x => x.Number == "00001"));
+
+            //return Ok(_invoiceService.Get(x => x.Number == "00001"));
+
+            return _invoiceService.Get(x => x.Number == "00001");
         }
 
 
@@ -28,7 +31,7 @@ namespace Example.RestFullApi.Controllers
 
 
 
-            return Ok("");
+            return BadRequest("");
         }
 
         [HttpPut]

@@ -21,7 +21,7 @@ namespace Example.BussinesLayer
             if (Instance == null)
             {
                 Instance = new Global();
-                Instance.CurrentDatabase = DatabaseTypes.Mssql;
+                Instance.CurrentDatabase = DatabaseTypes.SqlLite;
                 Instance.Service = IOC.IOC.ConfigRepoStory(new ServiceCollection());
                 
                 ICheckDatabase Check = Instance.Service.GetService<ICheckDatabase>();
