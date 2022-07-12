@@ -52,14 +52,14 @@ namespace Example.BussinesLayer.Concrete
 
             if (Item == null)
             {
-                ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.BadRequest);
+                ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.NotFound);
                 ResultBuilder.AddMessage("Veri Bulanamadı");
 
 
             }
             else
             {
-                ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.OK);
+                ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.Found);
                 ResultBuilder.AddMessage("Veriler Başarılı Bir Şekilde Listelendi");
 
 
