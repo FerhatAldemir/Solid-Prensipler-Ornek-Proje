@@ -19,21 +19,23 @@ namespace Example.Core.Concrete
         public void beginTransection()
         {
             Context.Database.BeginTransaction();
+            
         }
 
         public void Commit()
         {
-            Context.Database.BeginTransaction();
+            Context.Database.CurrentTransaction.Commit();
         }
 
         public void Dispose()
         {
+            Context.Database.CurrentTransaction.Dispose();
             Context.Dispose();
         }
 
         public void RollBack()
         {
-            Context.Database.RollbackTransaction();
+            Context.Database.CurrentTransaction.Rollback();
         }
 
         public void SaveChanges()

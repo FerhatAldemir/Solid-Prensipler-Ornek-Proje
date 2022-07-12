@@ -42,7 +42,42 @@ namespace Example.BussinesLayer.Concrete
 
         public Result<Entites.ComplexType.Invoice> Delete(Expression<Func<Entites.concrete.Invoice, bool>> Filter)
         {
-            throw new NotImplementedException();
+          
+            var Item = RepoStory.Invoice.GetInvoice(Filter);
+           
+            if (Item == null)
+            {
+                    ResultBuilder.AddMessage("Silinmek İstenen Fatura Bulanamadı");
+                    ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.NotFound);
+               
+
+            }
+            else
+            {
+                try
+                {
+                RepoStory.beginTransection();
+                RepoStory.Invoice.Remove(Filter);
+                RepoStory.StLine.Remove(x=>x.InvoiceRef == Item.LogicalRef);
+                RepoStory.SaveChanges();
+                RepoStory.Commit();
+                ResultBuilder.AddMessage("Fatura Başarı İle Silindi");
+                ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.Found);
+                ResultBuilder.AddITem(Item);
+
+                }
+                catch (Exception ex)
+                {
+                    RepoStory.RollBack();
+
+                    ResultBuilder.AddMessage("Silme İşlemi Tamamlanamadı. Hata :" + ex.Message);
+                    ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.InternalServerError);
+                }
+
+            }
+            
+          
+            return ResultBuilder.GetResult();
         }
 
         public Result<Entites.ComplexType.Invoice> Get(Expression<Func<Entites.concrete.Invoice, bool>> Filter)

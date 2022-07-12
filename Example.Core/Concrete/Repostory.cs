@@ -64,7 +64,7 @@ namespace Example.Core.Concrete
 
         public void Remove(Expression<Func<Tentity, bool>> Filter)
         {
-            _Context.RemoveRange(Filter);
+            _Context.Set<Tentity>().RemoveRange(_Context.Set<Tentity>().Where(Filter));
         }
 
         public Tentity Update(Tentity Item)

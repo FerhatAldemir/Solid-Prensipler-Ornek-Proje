@@ -32,12 +32,22 @@ namespace Example.RestFullApi.Controllers
             return this.StatusCode((int)Item.StatusCode, Item);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public IActionResult RemoveInvoice(int id)
         {
 
 
-            var Item = _invoiceService.Delete(id);
+            var Item = _invoiceService.Delete(x=>x.LogicalRef == id);
+            return this.StatusCode((int)Item.StatusCode, Item);
+        }
+
+
+        [HttpDelete("{Number}")]
+        public IActionResult RemoveInvoice(string Number)
+        {
+
+
+            var Item = _invoiceService.Delete(x => x.Number == Number );
             return this.StatusCode((int)Item.StatusCode, Item);
         }
 
