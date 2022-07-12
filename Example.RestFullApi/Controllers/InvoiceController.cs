@@ -15,16 +15,23 @@ namespace Example.RestFullApi.Controllers
         {
             _invoiceService = InvoiceService;
         }
-      [HttpGet]
-     public ActionResult<Core.Bussines.IResult<Entites.ComplexType.Invoice>> GetInvoice()
+      [HttpGet("{InvoiceNumber}")]
+     public ActionResult<Core.Bussines.IResult<Entites.ComplexType.Invoice>> GetInvoice(string InvoiceNumber)
         {
 
-            var Item = _invoiceService.Get(x => x.Number == "00001");
+            var Item = _invoiceService.Get(x => x.Number == InvoiceNumber);
             
             return this.StatusCode((int)Item.StatusCode,Item);
         }
+        [HttpGet("{InvoiceId:int}")]
+        public ActionResult<Core.Bussines.IResult<Entites.ComplexType.Invoice>> GetInvoice(int InvoiceId)
+        {
 
-        
+            var Item = _invoiceService.Get(x => x.LogicalRef == InvoiceId);
+
+            return this.StatusCode((int)Item.StatusCode, Item);
+        }
+
         [HttpDelete("{id}")]
         public IActionResult RemoveInvoice(int id)
         {
