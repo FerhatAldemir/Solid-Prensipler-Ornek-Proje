@@ -7,9 +7,9 @@ namespace Example.DataAccessLayer.Concrete
 {
     public class CheckDataBase : absraction.ICheckDatabase
     {
-        readonly DbContext Context;
+        readonly Core.DataAccess.DataBaseContext Context;
 
-        public CheckDataBase(DbContext context)
+        public CheckDataBase(Core.DataAccess.DataBaseContext context)
         {
             Context = context;
         }
@@ -23,7 +23,7 @@ namespace Example.DataAccessLayer.Concrete
 
         public void MigrationDatase()
         {
-            Context.Database.Migrate();
+            Context.Migrate();
         }
     }
 }

@@ -8,9 +8,9 @@ namespace Example.Core.Concrete
 {
     public class UnitWork: Core.UnitOfWork.IUnitOfWork
     {
-        private DbContext Context { get; set; }
+        private Core.DataAccess.DataBaseContext Context { get; set; }
 
-        public UnitWork(DbContext context)
+        public UnitWork(Core.DataAccess.DataBaseContext context)
         {
             Context = context;
 
@@ -18,24 +18,24 @@ namespace Example.Core.Concrete
 
         public void beginTransection()
         {
-            Context.Database.BeginTransaction();
+            Context.BeginTransaction();
             
         }
 
         public void Commit()
         {
-            Context.Database.CurrentTransaction.Commit();
+            Context.Commit();
         }
 
         public void Dispose()
         {
-            Context.Database.CurrentTransaction.Dispose();
+           
             Context.Dispose();
         }
 
         public void RollBack()
         {
-            Context.Database.CurrentTransaction.Rollback();
+            Context.RollBack();
         }
 
         public void SaveChanges()

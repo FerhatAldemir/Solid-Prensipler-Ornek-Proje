@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using Example.Core.DataAccess;
 
 namespace Example.DataAccessLayer.Context
 {
-    public class MssqlContext : DbContext
+    public class MssqlContext : DbContext,Core.DataAccess.DataBaseContext
     {
         public MssqlContext()
         {
@@ -32,6 +34,52 @@ namespace Example.DataAccessLayer.Context
             optionsBuilder.UseSqlServer(ConString);
 
 
+        }
+
+        IQueryable<T> DataBaseContext.Set<T>()
+        {
+            return this.Set<T>();
+        }
+
+        public void BeginTransaction()
+        {
+            this.Database.BeginTransaction();
+        }
+
+        public void Commit()
+        {
+            this.Database.CurrentTransaction.Commit();
+        }
+
+        public void RollBack()
+        {
+            this.Database.CurrentTransaction.Rollback();
+        }
+
+        T DataBaseContext.Add<T>(T Item)
+        {
+            
+            return this.Set<T>().Add(Item) as T;
+        }
+
+        void DataBaseContext.Remove<T>(T Item)
+        {
+            this.Set<T>().Remove(Item);
+        }
+
+        void DataBaseContext.RemoveRange<T>(IQueryable<T> Items)
+        {
+            this.Set<T>().RemoveRange(Items);
+        }
+
+        T DataBaseContext.Update<T>(T Item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Migrate()
+        {
+            this.Database.Migrate();
         }
 
         public DbSet<Entites.concrete.Invoice> ınvoices { get;set;}

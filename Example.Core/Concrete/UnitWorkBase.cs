@@ -8,9 +8,9 @@ namespace Example.Core.Concrete
 {
     public class UnitWorkBase: Core.UnitOfWork.IUnitOfWorkBase
     {
-        private DbContext Context { get; set; }
+        private Core.DataAccess.DataBaseContext Context { get; set; }
 
-        public UnitWorkBase(DbContext context)
+        public UnitWorkBase(Core.DataAccess.DataBaseContext context)
         {
             Context = context;
 
@@ -18,12 +18,12 @@ namespace Example.Core.Concrete
 
         public void beginTransection()
         {
-            Context.Database.BeginTransaction();
+            Context.BeginTransaction();
         }
 
         public void Commit()
         {
-            Context.Database.CurrentTransaction.Commit();
+            Context.Commit();
         }
 
         public void Dispose()
@@ -34,7 +34,7 @@ namespace Example.Core.Concrete
 
         public void RollBack()
         {
-            Context.Database.CurrentTransaction.Rollback();
+            Context.RollBack();
         }
 
         public void SaveChanges()

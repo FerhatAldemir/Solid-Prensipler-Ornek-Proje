@@ -10,7 +10,7 @@ namespace Example.DataAccessLayer.RepoStoryConcrete
     {
         private  IinvoiceDal InvoiceDal { get; set; }
         private IStLineDal StLineDal { get; set; }
-        public InvoiceRepoStory(DbContext context,IinvoiceDal _InvoiceDal,IStLineDal stLineDal) : base(context)
+        public InvoiceRepoStory(Core.DataAccess.DataBaseContext context,IinvoiceDal _InvoiceDal,IStLineDal stLineDal) : base(context)
         {
             InvoiceDal = _InvoiceDal;
             StLineDal = stLineDal;

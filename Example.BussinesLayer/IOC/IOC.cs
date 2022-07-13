@@ -44,11 +44,11 @@ namespace Example.BussinesLayer.IOC
 
             if (Global.GetInstance().CurrentDatabase == DatabaseTypes.Mssql)
             {
-                services.RegisterTypes<DbContext, MssqlContext>(ServiceLifetime.Scoped);
+                services.RegisterTypes<Core.DataAccess.DataBaseContext, MssqlContext>(ServiceLifetime.Scoped);
             }
             else if (Global.GetInstance().CurrentDatabase == DatabaseTypes.SqlLite)
             {
-                services.RegisterTypes<DbContext, SqlLiteContext>(ServiceLifetime.Scoped);
+                services.RegisterTypes<Core.DataAccess.DataBaseContext, SqlLiteContext>(ServiceLifetime.Scoped);
           
             }
 

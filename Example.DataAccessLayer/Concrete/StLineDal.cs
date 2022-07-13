@@ -7,7 +7,7 @@ namespace Example.DataAccessLayer.Concrete
 {
     public class StLineDal : Core.Concrete.Repostory<Entites.concrete.InvoiceLine>,DataAccessLayer.absraction.IStLineDal
     {
-        public StLineDal(DbContext context) : base(context)
+        public StLineDal(Core.DataAccess.DataBaseContext context) : base(context)
         {
         }
     }

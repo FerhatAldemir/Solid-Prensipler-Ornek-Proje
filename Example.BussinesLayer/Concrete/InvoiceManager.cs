@@ -70,7 +70,7 @@ namespace Example.BussinesLayer.Concrete
                 {
                     RepoStory.RollBack();
 
-                    ResultBuilder.AddMessage("Silme İşlemi Tamamlanamadı. Hata :" + ex.Message);
+                    ResultBuilder.AddMessage("Silme İşlemi Gerçekleşirken Bir Hata Verdi. Hata :" + ex.Message);
                     ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.InternalServerError);
                 }
 
@@ -83,7 +83,7 @@ namespace Example.BussinesLayer.Concrete
         public Result<Entites.ComplexType.Invoice> Get(Expression<Func<Entites.concrete.Invoice, bool>> Filter)
         {
             var Item = RepoStory.Invoice.GetInvoice(Filter);
-            RepoStory.Dispose();
+          
 
             if (Item == null)
             {

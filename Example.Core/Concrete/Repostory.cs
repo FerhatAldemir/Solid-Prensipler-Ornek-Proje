@@ -9,9 +9,9 @@ namespace Example.Core.Concrete
 {
     public class Repostory<Tentity>: RepoStory.IEntityRepoStory<Tentity> where Tentity : class, Ientites
     {
-        protected readonly DbContext _Context;
+        protected readonly Core.DataAccess.DataBaseContext _Context;
         
-        public Repostory(DbContext context)
+        public Repostory(Core.DataAccess.DataBaseContext context)
         {
             _Context = context;
             
@@ -19,7 +19,7 @@ namespace Example.Core.Concrete
 
         public Tentity Add(Tentity Item)
         {
-            _Context.Set<Tentity>().Add(Item);
+            _Context.Add(Item);
             return Item;
         }
 
@@ -53,8 +53,7 @@ namespace Example.Core.Concrete
             foreach (Tentity Item in Items)
             {
 
-                var Entry = _Context.Entry(Item);
-                Entry.State = EntityState.Deleted;
+               
                
 
             }
@@ -64,13 +63,12 @@ namespace Example.Core.Concrete
 
         public void Remove(Expression<Func<Tentity, bool>> Filter)
         {
-            _Context.Set<Tentity>().RemoveRange(_Context.Set<Tentity>().Where(Filter));
+            _Context.RemoveRange(_Context.Set<Tentity>().Where(Filter));
         }
 
         public Tentity Update(Tentity Item)
         {
-            var Entry = _Context.Entry(Item);
-            Entry.State = EntityState.Modified;
+           
             return Item;
         }
 
@@ -81,8 +79,7 @@ namespace Example.Core.Concrete
             foreach (Tentity Item in Items)
             {
 
-                var Entry = _Context.Entry(Item);
-                Entry.State = EntityState.Modified;
+              
                 ReturnsItem.Add(Item);
 
             }
