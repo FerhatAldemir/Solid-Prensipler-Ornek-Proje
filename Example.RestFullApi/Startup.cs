@@ -10,6 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Example.BussinesLayer.IOC;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Example.RestFullApi
 {
@@ -26,7 +29,36 @@ namespace Example.RestFullApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<BussinesLayer.Absraction.IInvoiceService,BussinesLayer.Concrete.InvoiceManager>();
+           
+            BussinesLayer.Global.GetInstance().Service = services.ConfigRepoStory();
 
+
+            services.AddSwaggerGen(opt => {
+                opt.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo());
+                var jwtSecurityScheme = new OpenApiSecurityScheme
+                {
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    Name = "JWT Authentication",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Description = "Put **_ONLY_** your JWT Bearer token on textbox below!",
+
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
+
+                opt.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+                opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { jwtSecurityScheme, Array.Empty<string>() }
+    });
+
+            });
             services.AddControllers();
         }
 
@@ -38,6 +70,12 @@ namespace Example.RestFullApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = "api";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Example Project");
+            });
             app.UseHttpsRedirection();
 
             app.UseRouting();

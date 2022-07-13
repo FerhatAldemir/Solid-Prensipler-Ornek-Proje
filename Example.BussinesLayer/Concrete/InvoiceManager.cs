@@ -14,20 +14,97 @@ namespace Example.BussinesLayer.Concrete
     {
         private DataAccessLayer.RepoStoryAbsraction.IInvoiceRepoStory RepoStory { get; set; }
         private Absraction.IResutBuilder<Entites.ComplexType.Invoice> ResultBuilder { get; set; }
-        public InvoiceManager()
+        public InvoiceManager(DataAccessLayer.RepoStoryAbsraction.IInvoiceRepoStory a)
         {
-            RepoStory = Global.GetInstance().Service.GetService<DataAccessLayer.RepoStoryAbsraction.IInvoiceRepoStory>();
+            RepoStory = a;
             ResultBuilder = Global.GetInstance().Service.GetService<Absraction.IResutBuilder<Entites.ComplexType.Invoice>>();
         }
 
         public Result<Entites.ComplexType.Invoice> Post(Entites.ComplexType.Invoice Item)
         {
-            throw new NotImplementedException();
+            try { 
+            RepoStory.beginTransection();
+
+            Entites.concrete.Invoice Invoice = (Entites.concrete.Invoice)Item;
+            RepoStory.Invoice.Add(Invoice);
+            RepoStory.SaveChanges();
+            foreach (var Inv in Item.InvoiceLines)
+            {
+                var InvLine = (Entites.concrete.InvoiceLine)Inv;
+                InvLine.InvoiceRef = Invoice.LogicalRef;
+                RepoStory.StLine.Add(InvLine); 
+
+
+
+            }
+            RepoStory.SaveChanges();
+            RepoStory.Commit();
+            ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.Accepted);
+            ResultBuilder.AddMessage("Fatura Başarılı Bir Şekilde Eklendi");
+            ResultBuilder.AddITem(RepoStory.Invoice.GetInvoice(x=>x.LogicalRef == Invoice.LogicalRef));
+            }
+            catch (Exception ex)
+            {
+
+                RepoStory.RollBack();
+
+                ResultBuilder.AddMessage("Fatura Ekleme İşlemi Gerçekleşirken Bir Hata Verdi. Hata :" + ex.Message);
+                ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.InternalServerError);
+
+            }
+            return ResultBuilder.GetResult();
+
+
         }
 
         public Result<Entites.ComplexType.Invoice> Put(Entites.ComplexType.Invoice ITem)
         {
-            throw new NotImplementedException();
+            Entites.concrete.Invoice Invoice = (Entites.concrete.Invoice)ITem;
+            try {
+                RepoStory.beginTransection();
+            RepoStory.Invoice.Update(Invoice);
+            RepoStory.SaveChanges();
+
+                foreach (var Inv in ITem.InvoiceLines)
+            {
+                var InvLine = (Entites.concrete.InvoiceLine)Inv;
+                switch (Inv.Statu)
+                {
+                    case Statu.Updated:
+                    RepoStory.StLine.Update(InvLine);
+                   
+                    break;
+                    case Statu.Deleted:
+                    RepoStory.StLine.Remove(InvLine);
+                    RepoStory.SaveChanges();
+                    break;
+                    case Statu.Inserted:
+                    InvLine.InvoiceRef = Invoice.LogicalRef;
+                    var AddedItem = RepoStory.StLine.Add(InvLine);
+                    RepoStory.SaveChanges();
+                    Inv.Statu = Statu.Updated;
+                    Inv.LogicalRef = AddedItem.LogicalRef;
+                    break;
+
+                }
+
+            }
+
+                RepoStory.Commit();
+                ResultBuilder.AddITem(RepoStory.Invoice.GetInvoice(x=>x.LogicalRef == Invoice.LogicalRef));
+             
+                ResultBuilder.AddMessage("Fatura Güncelleme İşlemi Başarıyla Tamamlandı.");
+                ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.Accepted);
+
+            }
+            catch (Exception ex)
+            {
+                RepoStory.RollBack();
+                ResultBuilder.AddMessage("Fatura Güncelleme İşlemi Başarısız Oldu. Hata:"+ex.Message);
+                ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.InternalServerError);
+            }
+            RepoStory.Dispose();
+            return ResultBuilder.GetResult();
         }
 
         public Result<Entites.ComplexType.Invoice> Delete(Entites.concrete.Invoice ITem)

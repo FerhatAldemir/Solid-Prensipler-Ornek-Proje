@@ -53,8 +53,8 @@ namespace Example.Core.Concrete
             foreach (Tentity Item in Items)
             {
 
-               
-               
+
+                _Context.Update(Item);
 
             }
         }
@@ -68,7 +68,8 @@ namespace Example.Core.Concrete
 
         public Tentity Update(Tentity Item)
         {
-           
+
+            _Context.Update(Item);
             return Item;
         }
 

@@ -14,11 +14,12 @@ namespace Example.RestFullApi.Controllers
         public InvoiceController(IInvoiceService InvoiceService)
         {
             _invoiceService = InvoiceService;
+         
         }
       [HttpGet("{InvoiceNumber}")]
      public ActionResult<Core.Bussines.IResult<Entites.ComplexType.Invoice>> GetInvoice(string InvoiceNumber)
         {
-
+             
             var Item = _invoiceService.Get(x => x.Number == InvoiceNumber);
             
             return this.StatusCode((int)Item.StatusCode,Item);
@@ -55,7 +56,7 @@ namespace Example.RestFullApi.Controllers
         public ActionResult<Core.Bussines.IResult<Entites.ComplexType.Invoice>> UpdateInvoice([FromBody] Entites.ComplexType.Invoice Invoice)
         {
             var Item = _invoiceService.Put(Invoice);
-
+            
 
             return this.StatusCode((int)Item.StatusCode, Item);
         }
@@ -66,7 +67,9 @@ namespace Example.RestFullApi.Controllers
 
             var Item = _invoiceService.Post(Invoice);
 
-            return this.StatusCode((int)Item.StatusCode,Item);
+            return this.StatusCode((int)Item.StatusCode, Item);
         }
+
+
     }
 }

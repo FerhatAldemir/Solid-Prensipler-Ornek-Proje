@@ -12,6 +12,7 @@ namespace Example.DataAccessLayer.RepoStoryConcrete
         private IStLineDal StLineDal { get; set; }
         public InvoiceRepoStory(Core.DataAccess.DataBaseContext context,IinvoiceDal _InvoiceDal,IStLineDal stLineDal) : base(context)
         {
+            
             InvoiceDal = _InvoiceDal;
             StLineDal = stLineDal;
         }

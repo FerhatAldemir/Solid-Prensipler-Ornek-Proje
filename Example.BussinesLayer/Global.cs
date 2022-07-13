@@ -12,7 +12,7 @@ namespace Example.BussinesLayer
        
         private static Global Instance {get;set;}
 
-        internal IServiceProvider Service { get; private set; }
+        public IServiceProvider Service { internal get;  set; }
 
         internal DatabaseTypes CurrentDatabase { get; set; }
 
@@ -22,10 +22,10 @@ namespace Example.BussinesLayer
             {
                 Instance = new Global();
                 Instance.CurrentDatabase = DatabaseTypes.Mssql;
-                Instance.Service = IOC.IOC.ConfigRepoStory(new ServiceCollection());
+                //Instance.Service = IOC.IOC.ConfigRepoStory(new ServiceCollection());
                 
-                ICheckDatabase Check = Instance.Service.GetService<ICheckDatabase>();
-                Check.MigrationDatase();
+                //ICheckDatabase Check = Instance.Service.GetService<ICheckDatabase>();
+                //Check.MigrationDatase();
             }
 
 

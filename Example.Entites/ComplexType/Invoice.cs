@@ -7,6 +7,7 @@ namespace Example.Entites.ComplexType
 {
     public class Invoice:BaseComplexType
     {
+        [Key]
         public int LogicalRef { get; set; }
         [MaxLength(length: 16)]
         public string Number { get; set; }
@@ -20,7 +21,15 @@ namespace Example.Entites.ComplexType
         {
 
 
-            return new concrete.Invoice { };
+            return new concrete.Invoice { 
+            
+            date = Invoice.date,
+            DocNum = Invoice.DocNum,
+            Number = Invoice.Number,
+            LogicalRef=Invoice.LogicalRef 
+            
+            
+            };
         }
     }
 }

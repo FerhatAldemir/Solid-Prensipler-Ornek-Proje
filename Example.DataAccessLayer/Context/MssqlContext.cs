@@ -14,10 +14,10 @@ namespace Example.DataAccessLayer.Context
         {
 
 
-            this.Database.AutoTransactionsEnabled = false;
+            this.Database.AutoTransactionsEnabled = true;
 
             this.ChangeTracker.LazyLoadingEnabled = false;
-            this.ChangeTracker.AutoDetectChangesEnabled = false;
+            this.ChangeTracker.AutoDetectChangesEnabled = true;
            
 
         }
@@ -74,7 +74,9 @@ namespace Example.DataAccessLayer.Context
 
         T DataBaseContext.Update<T>(T Item)
         {
-            throw new NotImplementedException();
+            var Entry = this.Attach(Item);
+         
+            return Item;
         }
 
         public void Migrate()

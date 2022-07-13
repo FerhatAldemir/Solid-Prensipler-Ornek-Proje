@@ -35,11 +35,11 @@ namespace Example.BussinesLayer.IOC
                 ).
                 ToArray();
            
-            services.RegisterTypes(TypeRepo, ServiceLifetime.Transient);
+            services.RegisterTypes(TypeRepo, ServiceLifetime.Scoped);
 
-            services.RegisterTypes<ICheckDatabase, CheckDataBase>(ServiceLifetime.Singleton);
+            services.RegisterTypes<ICheckDatabase, CheckDataBase>(ServiceLifetime.Scoped);
 
-            services.RegisterTypes<Absraction.IResutBuilder<Entites.ComplexType.Invoice>, Concrete.ResultBuilder<Entites.ComplexType.Invoice>>(ServiceLifetime.Transient);
+            services.RegisterTypes<Absraction.IResutBuilder<Entites.ComplexType.Invoice>, Concrete.ResultBuilder<Entites.ComplexType.Invoice>>(ServiceLifetime.Scoped);
 
 
             if (Global.GetInstance().CurrentDatabase == DatabaseTypes.Mssql)
