@@ -15,11 +15,14 @@ namespace Example.BussinesLayer.Concrete
     {
         private DataAccessLayer.RepoStoryAbsraction.IInvoiceRepoStory RepoStory { get; set; }
         private Absraction.IResutBuilder<Entites.ComplexType.Invoice> ResultBuilder { get; set; }
-        
-        public InvoiceManager(DataAccessLayer.RepoStoryAbsraction.IInvoiceRepoStory a)
+        private Absraction.IUserManager<Entites.concrete.User, Core.Concrete.Result<object>> UserManager;
+
+
+        public InvoiceManager(DataAccessLayer.RepoStoryAbsraction.IInvoiceRepoStory repo,Absraction.IUserManager<Entites.concrete.User,Core.Concrete.Result<object>> userManager)
         {
            
-            RepoStory = a;
+            RepoStory = repo;
+            UserManager = userManager;
             ResultBuilder = Global.GetInstance().Service.GetService<Absraction.IResutBuilder<Entites.ComplexType.Invoice>>();
         }
 
