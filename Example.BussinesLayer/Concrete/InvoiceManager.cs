@@ -7,6 +7,7 @@ using System.Text;
 using System.Linq;
 using Example.Core.Bussines;
 using Example.Core.Concrete;
+using Microsoft.AspNetCore.Identity;
 
 namespace Example.BussinesLayer.Concrete
 {
@@ -14,8 +15,10 @@ namespace Example.BussinesLayer.Concrete
     {
         private DataAccessLayer.RepoStoryAbsraction.IInvoiceRepoStory RepoStory { get; set; }
         private Absraction.IResutBuilder<Entites.ComplexType.Invoice> ResultBuilder { get; set; }
+        
         public InvoiceManager(DataAccessLayer.RepoStoryAbsraction.IInvoiceRepoStory a)
         {
+           
             RepoStory = a;
             ResultBuilder = Global.GetInstance().Service.GetService<Absraction.IResutBuilder<Entites.ComplexType.Invoice>>();
         }
@@ -161,7 +164,7 @@ namespace Example.BussinesLayer.Concrete
         {
             var Item = RepoStory.Invoice.GetInvoice(Filter);
           
-
+           
             if (Item == null)
             {
                 ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.NotFound);

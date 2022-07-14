@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Example.BussinesLayer.Absraction;
-using System.Linq;
-using System.Collections.Generic;
-using System.Net;
+ 
 
 namespace Example.RestFullApi.Controllers
 {
@@ -11,16 +9,20 @@ namespace Example.RestFullApi.Controllers
     public class InvoiceController : ControllerBase
     {
         private readonly IInvoiceService _invoiceService;
-        public InvoiceController(IInvoiceService InvoiceService)
+        private readonly IUserManager<Entites.concrete.User, Core.Concrete.Result<object>> userManager;
+
+        public InvoiceController(IInvoiceService InvoiceService,
+            IUserManager<Entites.concrete.User, Core.Concrete.Result<object>> _userManager)
         {
             _invoiceService = InvoiceService;
-         
+            userManager = _userManager;   
         }
-      [HttpGet("{InvoiceNumber}")]
+        [HttpGet("{InvoiceNumber}")]
      public ActionResult<Core.Bussines.IResult<Entites.ComplexType.Invoice>> GetInvoice(string InvoiceNumber)
         {
              
             var Item = _invoiceService.Get(x => x.Number == InvoiceNumber);
+
             
             return this.StatusCode((int)Item.StatusCode,Item);
         }
@@ -28,6 +30,7 @@ namespace Example.RestFullApi.Controllers
         public ActionResult<Core.Bussines.IResult<Entites.ComplexType.Invoice>> GetInvoice(int InvoiceId)
         {
 
+            var a = userManager.Context;
             var Item = _invoiceService.Get(x => x.LogicalRef == InvoiceId);
 
             return this.StatusCode((int)Item.StatusCode, Item);

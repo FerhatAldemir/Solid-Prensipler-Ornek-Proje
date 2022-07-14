@@ -13,6 +13,11 @@ using System.Threading.Tasks;
 using Example.BussinesLayer.IOC;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Example.RestFullApi
 {
@@ -28,9 +33,51 @@ namespace Example.RestFullApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+       
             services.AddScoped<BussinesLayer.Absraction.IInvoiceService,BussinesLayer.Concrete.InvoiceManager>();
            
             BussinesLayer.Global.GetInstance().Service = services.ConfigRepoStory();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            
+            }
+            ).AddJwtBearer(x=> {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = c =>
+                    {
+                        //bu bölümlerde tokeni farklý þekillerde yakalayacaksak kullanacaðýz...
+
+
+                        return Task.CompletedTask;
+                    
+                    } };
+                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    //Token Doðrulama Parametreleri 
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateIssuerSigningKey = true,
+                    ClockSkew = TimeSpan.Zero,
+                    ValidateLifetime = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("test"))
+
+
+
+                };
+            
+            });
+
+          
+
+
 
 
             services.AddSwaggerGen(opt => {
