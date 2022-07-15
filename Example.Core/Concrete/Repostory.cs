@@ -23,6 +23,11 @@ namespace Example.Core.Concrete
             return Item;
         }
 
+        public bool Any(Expression<Func<Tentity, bool>> filter)
+        {
+            return _Context.Set<Tentity>().Any(filter);
+        }
+
         public Tentity Get(Expression<Func<Tentity, bool>> Filter)
         {
            

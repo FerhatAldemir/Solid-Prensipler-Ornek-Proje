@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Example.BussinesLayer.Concrete
 {
-    public class UserInfoManager : Absraction.IUserInfoService
+    public class UserInfoManager : Core.Identity.IUserInfoService<Entites.ComplexType.User>
     {
         private IHttpContextAccessor httpContextAccessor;
         private DataAccessLayer.RepoStoryAbsraction.IUserRepoStory userRepoStory;

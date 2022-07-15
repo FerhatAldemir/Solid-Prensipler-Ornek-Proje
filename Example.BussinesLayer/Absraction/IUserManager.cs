@@ -18,8 +18,11 @@ namespace Example.BussinesLayer.Absraction
         Task SignOutAsync();
 
         R RefreshToken();
+        Task<R> RefreshTokenAsync();
+
 
         R TwoFactorAuthentication(string code);
-    /*    R Authentication(string user,string Password);*/
+        Task<R> TwoFactorAuthenticationAsync(string code);
+        /*    R Authentication(string user,string Password);*/
     }
 }

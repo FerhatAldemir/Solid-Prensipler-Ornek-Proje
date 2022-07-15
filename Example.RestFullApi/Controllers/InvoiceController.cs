@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Example.BussinesLayer.Absraction;
- 
+using Microsoft.AspNetCore.Authorization;
 
 namespace Example.RestFullApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class InvoiceController : ControllerBase
     {
         private readonly IInvoiceService _invoiceService;

@@ -16,6 +16,7 @@ namespace Example.Core.RepoStory
 
         T Update(T Item);
 
+        bool Any(Expression<Func<T,bool>> filter);
         List<T> Update(List<T> Items);
 
         void Remove(T Item);

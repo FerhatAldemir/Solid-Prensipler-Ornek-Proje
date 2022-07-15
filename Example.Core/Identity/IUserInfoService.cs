@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Example.BussinesLayer.Absraction
+
+namespace Example.Core.Identity
 {
-    public interface IUserInfoService
+    public interface IUserInfoService<T>
     {
         HttpContext Context { get; }
-        Entites.ComplexType.User User { get; }
+        T User { get; }
 
         bool IsAuthenticated { get; }
     }
