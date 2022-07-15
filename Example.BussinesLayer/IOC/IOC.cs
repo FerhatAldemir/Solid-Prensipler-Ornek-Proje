@@ -41,7 +41,8 @@ namespace Example.BussinesLayer.IOC
 
             services.RegisterTypes<Absraction.IResutBuilder<Entites.ComplexType.Invoice>, Concrete.ResultBuilder<Entites.ComplexType.Invoice>>(ServiceLifetime.Scoped);
             services.RegisterTypes<Absraction.IResutBuilder<object>, Concrete.ResultBuilder<object>>(ServiceLifetime.Scoped);
-            services.RegisterTypes<Absraction.IUserManager<Entites.concrete.User, Core.Concrete.Result<object>>, Concrete.UserManager>(ServiceLifetime.Transient);
+            services.RegisterTypes<Absraction.IUserManager<Entites.concrete.User, Core.Concrete.Result<object>>, Concrete.UserManager>(ServiceLifetime.Scoped);
+            services.RegisterTypes<Absraction.IUserInfoService, Concrete.UserInfoManager>(ServiceLifetime.Scoped);
 
             if (Global.GetInstance().CurrentDatabase == DatabaseTypes.Mssql)
             {

@@ -15,15 +15,15 @@ namespace Example.BussinesLayer.Concrete
     {
         private DataAccessLayer.RepoStoryAbsraction.IInvoiceRepoStory RepoStory { get; set; }
         private Absraction.IResutBuilder<Entites.ComplexType.Invoice> ResultBuilder { get; set; }
-        private Absraction.IUserManager<Entites.concrete.User, Core.Concrete.Result<object>> UserManager;
+        private Absraction.IUserInfoService user;
 
 
-        public InvoiceManager(DataAccessLayer.RepoStoryAbsraction.IInvoiceRepoStory repo,Absraction.IUserManager<Entites.concrete.User,Core.Concrete.Result<object>> userManager)
+        public InvoiceManager(DataAccessLayer.RepoStoryAbsraction.IInvoiceRepoStory repo,
+            Absraction.IUserInfoService user, Absraction.IResutBuilder<Entites.ComplexType.Invoice> resutBuilder)
         {
-           
             RepoStory = repo;
-            UserManager = userManager;
-            ResultBuilder = Global.GetInstance().Service.GetService<Absraction.IResutBuilder<Entites.ComplexType.Invoice>>();
+            this.user = user;
+            ResultBuilder = resutBuilder;
         }
 
         public Result<Entites.ComplexType.Invoice> Post(Entites.ComplexType.Invoice Item)
@@ -166,8 +166,8 @@ namespace Example.BussinesLayer.Concrete
         public Result<Entites.ComplexType.Invoice> Get(Expression<Func<Entites.concrete.Invoice, bool>> Filter)
         {
             var Item = RepoStory.Invoice.GetInvoice(Filter);
-          
-           
+
+            var a = user.User;
             if (Item == null)
             {
                 ResultBuilder.AddHttpStatus(System.Net.HttpStatusCode.NotFound);

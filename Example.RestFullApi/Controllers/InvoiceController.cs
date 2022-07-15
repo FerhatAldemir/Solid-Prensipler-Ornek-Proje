@@ -30,7 +30,7 @@ namespace Example.RestFullApi.Controllers
         public ActionResult<Core.Bussines.IResult<Entites.ComplexType.Invoice>> GetInvoice(int InvoiceId)
         {
 
-            var a = userManager.Context;
+          
             var Item = _invoiceService.Get(x => x.LogicalRef == InvoiceId);
 
             return this.StatusCode((int)Item.StatusCode, Item);

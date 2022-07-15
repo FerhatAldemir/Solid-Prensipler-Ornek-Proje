@@ -84,7 +84,8 @@ namespace Example.DataAccessLayer.Context
             this.Database.Migrate();
         }
 
-        public DbSet<Entites.concrete.Invoice> ınvoices { get;set;}
+        public DbSet<Entites.concrete.Invoice> Invoices { get;set;}
         public DbSet<Entites.concrete.InvoiceLine> ınvoiceLines { get;set;} 
+        public DbSet<Entites.concrete.User> Users { get;set;}
         }
 }
